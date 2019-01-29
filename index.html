@@ -17,27 +17,71 @@
         <header class="title_header">
            <div class="container-fluid">
               <div class="row">
-                  <div class="col-2"><i class="fas fa-chevron-left item__icon"></i></div>
-                  <div class="col-8">Статистика</div>
+                  <div class="col-2 back-button"><i class="fas fa-chevron-left item__icon hidden"></i></div>
+                  <div class="col-8 screen-title">Статистика</div>
                   <div class="col-2"></div>
               </div>
            </div>
         </header>
-        <div class="container">
-            <ul class="stats_list">
-                <li class="stats_list__item">
-                    <i class="fas fa-coins item__icon"></i>
-                    <a href="#ChartPie1">Транзакции и оборот</a>
-                    <i class="fas fa-chevron-right native__icon"></i>
-                </li>
-                <li class="stats_list__item"><i class="far fa-user item__icon"></i><a href="#ChartPie2">Пользователи</a><i class="fas fa-chevron-right native__icon"></i></li>
-                <li class="stats_list__item"><i class="fas fa-tenge item__icon"></i><a href="#ChartPie3">Средний чек</a><i class="fas fa-chevron-right native__icon"></i></li>
-                <li class="stats_list__item"><i class="fas fa-bullseye item__icon"></i><a href="#ChartPie4">Тепловая карта транзакций</a><i class="fas fa-chevron-right native__icon"></i></li>
-                <li class="stats_list__item"><i class="far fa-chart-bar item__icon"></i><a href="#ChartPie5">Демографические показатели</a><i class="fas fa-chevron-right native__icon"></i></li>
-                <li class="stats_list__item"><i class="far fa-building item__icon"></i><a href="#ChartPie7">Посещаемые заведения</a><i class="fas fa-chevron-right native__icon"></i></li>
-                <li class="stats_list__item"><i class="fas fa-users item__icon"></i><a href="#ChartPie6">Категории покупателей</a><i class="fas fa-chevron-right native__icon"></i></li>
-            </ul>
-        </div>
+        <div class="viewpager">
+            <div class="viewpager__inner">
+                <div class="container viewpager__item">
+                    <ul class="stats_list">
+                        <li class="stats_list__item"><i class="fas fa-coins item__icon"></i><a href="#ChartPie1">Транзакции и оборот</a><i class="fas fa-chevron-right native__icon"></i>
+                        </li>
+                        <li class="stats_list__item"><i class="far fa-user item__icon"></i><a href="#ChartPie2">Пользователи</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="fas fa-tenge item__icon"></i><a href="#ChartPie3">Средний чек</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="fas fa-bullseye item__icon"></i><a href="#ChartPie4">Тепловая карта транзакций</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="far fa-chart-bar item__icon"></i><a href="#ChartPie5">Демографические показатели</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="far fa-building item__icon"></i><a href="#ChartPie7">Посещаемые заведения</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="fas fa-users item__icon"></i><a href="#ChartPie6">Категории покупателей</a><i class="fas fa-chevron-right native__icon"></i></li>
+                    </ul>
+                </div>
+                <div class="container viewpager__item">
+
+                </div>
+            </div>
+        </div><!-- /viewpager -->
     </div><!-- /wrapper -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+
+            var globalPageState = 0;
+
+            $('.stats_list__item').on('click', function () {
+                var link = $(this).find('a').attr('href');
+                var headerText = $(this).find('a').text();
+                pageController('open', headerText, link);
+            })
+
+            $('.back-button').on('click', function () {
+                if (globalPageState == 1) {
+                    pageController('close');
+                }
+                else {
+                    return;
+                }
+            })
+
+            function pageController (state, headertext, link) {
+                if (state === 'open') {
+                    $('.viewpager__inner').addClass('viewpager__inner--opened');
+                    $('.screen-title').text(headertext);
+                    $('.back-button i').show();
+                    globalPageState = 1;
+                } else if (state === 'close') {
+                    $('.viewpager__inner').removeClass('viewpager__inner--opened');
+                    $('.screen-title').text('Статистика');
+                    $('.back-button i').hide();
+                    globalPageState = 0;
+                }
+
+            }
+
+        })
+    </script>
 </body>
 </html>

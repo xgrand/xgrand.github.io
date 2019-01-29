@@ -35,7 +35,7 @@ header {
 
 .stats_list__item a {
     font-size: 1.6rem;
-    font-weight: 100;
+    font-weight: 300;
     color: #474747;
     text-decoration: none;
     width: 100%;
@@ -58,4 +58,41 @@ header {
     display: inline-block;
     vertical-align: middle;
     float: right;
+}
+
+.viewpager {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.viewpager__inner {
+    width: 200%;
+    margin-left: 0;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.viewpager__inner--opened {
+    margin-left: -100%;
+}
+
+.viewpager__item {
+    width: 50%;
+    float: left;
+}
+
+#chart_div {
+    width: 100%;
+}
+
+#piechart {
+    width: 100%;
 }
