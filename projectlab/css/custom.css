@@ -1,0 +1,13 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+}
+
+.image-holder {
+    width: 100%;
+}
+
+.image-holder img {
+    width: 100%;
+}
