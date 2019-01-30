@@ -82,6 +82,11 @@ header {
 
 .viewpager__inner--opened {
     margin-left: -100%;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
 }
 
 .viewpager__item {
@@ -89,10 +94,76 @@ header {
     float: left;
 }
 
-#chart_div {
+#heatmap {
     width: 100%;
+    text-align: center;
+}
+
+#heatmap img {
+    width: 100%;
+}
+
+#chart1 {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+#users {
+    width: 100%;
+    overflow-x: scroll;
 }
 
 #piechart {
     width: 100%;
+}
+
+#linechart {
+    overflow-x: scroll;
+}
+
+.page-title {
+    font-size: 2.4rem;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+}
+
+
+@keyframes slideInRight {
+ from {
+     -webkit-transform: translateX(200%);
+     -moz-transform: translateX(200%);
+     -ms-transform: translateX(200%);
+     -o-transform: translateX(200%);
+     transform: translateX(200%);
+ }
+    to {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+    to {
+        -webkit-transform: translateX(200%);
+        -moz-transform: translateX(200%);
+        -ms-transform: translateX(200%);
+        -o-transform: translateX(200%);
+        transform: translateX(200%);
+    }
+}
+
+.charts {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

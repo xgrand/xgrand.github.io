@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap-grid.min.css" />
     <link rel="stylesheet" href="css/custom.css">
     <title>Document</title>
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="wrapper">
@@ -27,18 +27,39 @@
             <div class="viewpager__inner">
                 <div class="container viewpager__item">
                     <ul class="stats_list">
-                        <li class="stats_list__item"><i class="fas fa-coins item__icon"></i><a href="#ChartPie1">Транзакции и оборот</a><i class="fas fa-chevron-right native__icon"></i>
+                        <li class="stats_list__item"><i class="fas fa-coins item__icon"></i><a href="#chart1">Транзакции и оборот</a><i class="fas fa-chevron-right native__icon"></i>
                         </li>
-                        <li class="stats_list__item"><i class="far fa-user item__icon"></i><a href="#ChartPie2">Пользователи</a><i class="fas fa-chevron-right native__icon"></i></li>
-                        <li class="stats_list__item"><i class="fas fa-tenge item__icon"></i><a href="#ChartPie3">Средний чек</a><i class="fas fa-chevron-right native__icon"></i></li>
-                        <li class="stats_list__item"><i class="fas fa-bullseye item__icon"></i><a href="#ChartPie4">Тепловая карта транзакций</a><i class="fas fa-chevron-right native__icon"></i></li>
-                        <li class="stats_list__item"><i class="far fa-chart-bar item__icon"></i><a href="#ChartPie5">Демографические показатели</a><i class="fas fa-chevron-right native__icon"></i></li>
-                        <li class="stats_list__item"><i class="far fa-building item__icon"></i><a href="#ChartPie7">Посещаемые заведения</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="far fa-user item__icon"></i><a href="#users">Пользователи</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="fas fa-tenge item__icon"></i><a href="#linechart">Средний чек</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="fas fa-bullseye item__icon"></i><a href="#heatmap">Тепловая карта транзакций</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="far fa-chart-bar item__icon"></i><a href="#demography">Демографические показатели</a><i class="fas fa-chevron-right native__icon"></i></li>
+                        <li class="stats_list__item"><i class="far fa-building item__icon"></i><a href="#others">Посещаемые заведения</a><i class="fas fa-chevron-right native__icon"></i></li>
                         <li class="stats_list__item"><i class="fas fa-users item__icon"></i><a href="#ChartPie6">Категории покупателей</a><i class="fas fa-chevron-right native__icon"></i></li>
                     </ul>
                 </div>
                 <div class="container viewpager__item">
-
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="reveal_container">
+                                <div class="page-title">
+                                    1
+                                </div>
+                                <div class="page-content">
+                                    <div id="heatmap" class="charts">
+                                        <img src="img/heatmap.jpeg" alt="">
+                                    </div>
+                                    <div id="users" class="charts"></div>
+                                    <div id="chart1" class="charts"></div>
+                                    <div id="demography" class="charts">
+                                        <div id="gender"></div>
+                                        <div id="age"></div>
+                                    </div>
+                                    <div id="linechart" class="charts"></div>
+                                    <div id="others" class="charts"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- /viewpager -->
@@ -46,14 +67,18 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/chart1.js"></script>
     <script type="text/javascript">
         $(document).ready(function (e) {
 
             var globalPageState = 0;
 
-            $('.stats_list__item').on('click', function () {
+
+            $('.stats_list__item, a').on('click', function (e) {
+                e.preventDefault();
                 var link = $(this).find('a').attr('href');
                 var headerText = $(this).find('a').text();
+                $('.charts').hide();
                 pageController('open', headerText, link);
             })
 
@@ -69,17 +94,45 @@
             function pageController (state, headertext, link) {
                 if (state === 'open') {
                     $('.viewpager__inner').addClass('viewpager__inner--opened');
-                    $('.screen-title').text(headertext);
                     $('.back-button i').show();
+                    $('.page-title').text(headertext);
                     globalPageState = 1;
+                    var revealContainer = $('.reveal_container');
+                    contentReveal(revealContainer,'slideInRight', 1000);
+                    // alert(link);
+                    $(link).show();
                 } else if (state === 'close') {
                     $('.viewpager__inner').removeClass('viewpager__inner--opened');
-                    $('.screen-title').text('Статистика');
                     $('.back-button i').hide();
                     globalPageState = 0;
+                    $('div .slideInRight').removeClass('slideInRight');
                 }
-
             }
+            //contentReveal Functions
+            function contentReveal(element, animation, delay) {
+
+
+
+                if (element != null && element != undefined) {
+                    var elementsArray = $('.reveal_container').children('*');
+                    var multiplier = 1.5;
+                    var i = 0;
+                    elementsArray.eq(i).addClass('slideInRight');
+                    function delayLoop() {
+                        elementsArray.eq(i).addClass('slideInRight');
+                        i++;
+                        if (i < elementsArray.length) {
+                            setTimeout(delayLoop, 40);
+                        }
+                    }
+                    // delayLoop();
+                }
+                else {
+                    return;
+                }
+            }
+            // End contentRevealFunction
+
 
         })
     </script>
