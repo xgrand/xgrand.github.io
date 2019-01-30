@@ -1,7 +1,7 @@
 {
   "name": "RahmetLab",
-  "theme_color": "#ffffff",
-  "background_color": "#000000",
+  "theme_color": "#353535",
+  "background_color": "#353535",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
