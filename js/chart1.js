@@ -149,22 +149,21 @@ function drawLine() {
 function drawBasic() {
 
     var data = google.visualization.arrayToDataTable([
-        ['Заведение', '% посещений'],
-        ['DodoPizza', 30],
-        ['Rumi', 25],
-        ['Yuframe Burger', 20],
-        ['Angel-in-us', 20],
-        ['Другие', 5]
+        ['Заведение', '% посещений', { role: 'annotation' }],
+        ['DodoPizza', 30, 'DodoPizza'],
+        ['Rumi', 25, 'Rumi'],
+        ['Yuframe Burger', 20, "Yuframe Burger"],
+        ['Angel-in-us', 20, "Angel-in-us"],
+        ['Другие', 5, "Другие"]
     ]);
 
     var options = {
-        chartArea: {width: '70%'},
-        hAxis: {
-            minValue: 0,
-            maxValue: 100
+        explorer: {
+            actions: ['dragToPan', 'rightClickToReset']
         },
         height: 400,
-        width:600
+        width: 600,
+        legend: "none"
     };
 
     var chart = new google.visualization.BarChart(document.getElementById('others'));
